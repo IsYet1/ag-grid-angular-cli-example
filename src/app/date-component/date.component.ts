@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from "@angular/core";
-import {IDateParams} from "ag-grid-community";
-import {IDateAngularComp} from "ag-grid-angular";
+import {Component, OnDestroy} from '@angular/core';
+import {IDateParams} from 'ag-grid-community';
+import {IDateAngularComp} from 'ag-grid-angular';
 
 
 @Component({
@@ -11,9 +11,9 @@ import {IDateAngularComp} from "ag-grid-angular";
 export class DateComponent implements OnDestroy, IDateAngularComp {
     private date: Date;
     private params: IDateParams;
-    public dd: string = '';
-    public mm: string = '';
-    public yyyy: string = '';
+    public dd = '';
+    public mm = '';
+    public yyyy = '';
 
     agInit(params: IDateParams): void {
         this.params = params;
@@ -57,12 +57,12 @@ export class DateComponent implements OnDestroy, IDateAngularComp {
         }
     }
 
-    //*********************************************************************************
+    // *********************************************************************************
     //          INTERNAL LOGIC
-    //*********************************************************************************
+    // *********************************************************************************
 
     parseDate(dd, mm, yyyy) {
-        //If any of the three input date fields are empty, stop and return null
+        // If any of the three input date fields are empty, stop and return null
         if (dd.trim() === '' || mm.trim() === '' || yyyy.trim() === '') {
             return null;
         }
@@ -73,20 +73,20 @@ export class DateComponent implements OnDestroy, IDateAngularComp {
 
         let date = new Date(year, month - 1, day);
 
-        //If the date is not valid
+        // If the date is not valid
         if (isNaN(date.getTime())) {
             return null;
         }
 
-        //Given that new Date takes any garbage in, it is possible for the user to specify a new Date
-        //like this (-1, 35, 1) and it will return a valid javascript date. In this example, it will
-        //return Sat Dec 01    1 00:00:00 GMT+0000 (GMT) - Go figure...
-        //To ensure that we are not letting non sensical dates to go through we check that the resultant
-        //javascript date parts (month, year and day) match the given date fields provided as parameters.
-        //If the javascript date parts don't match the provided fields, we assume that the input is nonsensical
+        // Given that new Date takes any garbage in, it is possible for the user to specify a new Date
+        // like this (-1, 35, 1) and it will return a valid javascript date. In this example, it will
+        // return Sat Dec 01    1 00:00:00 GMT+0000 (GMT) - Go figure...
+        // To ensure that we are not letting non sensical dates to go through we check that the resultant
+        // javascript date parts (month, year and day) match the given date fields provided as parameters.
+        // If the javascript date parts don't match the provided fields, we assume that the input is nonsensical
         // ... ie: Day=-1 or month=14, if this is the case, we return null
-        //This also protects us from non sensical dates like dd=31, mm=2 of any year
-        if (date.getDate() != day || date.getMonth() + 1 != month || date.getFullYear() != year) {
+        // This also protects us from non sensical dates like dd=31, mm=2 of any year
+        if (date.getDate() !== day || date.getMonth() + 1 !== month || date.getFullYear() !== year) {
             return null;
         }
 
